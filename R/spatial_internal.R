@@ -296,7 +296,7 @@ iter.k.fit <- function(scale.data, cell.ident, data.use) {
         return(unlist(x = lapply(
           X = sort(x = unique(x = cell.ident)),
           FUN = function(y) {
-            return(dist(x = rbind(scale.data[, x, drop = FALSE], means.all[, y])))
+            return(dist(x = rbind(t(scale.data[, x, drop = FALSE]), means.all[, y])))
           }
         )))
       }
