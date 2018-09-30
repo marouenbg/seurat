@@ -286,7 +286,7 @@ FitGeneK <- function(
   new.mix.probs <- data.frame(
     SubsetColumn(
       data = object@spatial@mix.probs,
-      code = paste0(gene, "."),
+      code = paste0("^", gene, "\\."),
       invert = TRUE
     ),
     row.names = rownames(x = object@spatial@mix.probs)
