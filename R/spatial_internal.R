@@ -84,7 +84,7 @@ CalcInsitu <- function(
   #insilico.stain=matrix(unlist(lapply(1:64,function(x) sum(probs.use[x,]*data.use[gene,]))),nrow=8,ncol=8)
   insilico.vector <- unlist(
     x = lapply(
-      X = 1:64,
+      X = 1:3040,
       FUN = function(x) {
         return(sum(
           as.numeric(x = probs.use[x, cells.use]) *
@@ -228,7 +228,7 @@ MapCell <- function(
   if (do.plot) {
     #plot(total.prob,main=cell.name)
     par(mfrow = c(1, 2))
-    txt.matrix <- matrix(data = rep(x = "", 64), nrow=8, ncol=8)
+    txt.matrix <- matrix(data = rep(x = "", 3040), nrow=8, ncol=8)
     if (! is.null(x = text.val)) {
       txt.matrix[text.val] <- "X"
     }
@@ -315,16 +315,16 @@ iter.k.fit <- function(scale.data, cell.ident, data.use) {
 CellCentroid <- function(cell.probs) {
   centroid.x <- XCellCentroid(cell.probs = cell.probs)
   centroid.y <- YCellCentroid(cell.probs = cell.probs)
-  centroid.bin <- 8 * (centroid.y - 1) + centroid.x
+  centroid.bin <- 76 * (centroid.y - 1) + centroid.x
   return(centroid.bin)
 }
 
 #return x-coordinate cell centroid
 XCellCentroid <- function(cell.probs) {
   centroid.x <- round(x = sum(sapply(
-    X = 1:64,
+    X = 1:3040,
     FUN = function(x) {
-      return((x - 1) %% 8 + 1)
+      return((x - 1) %% 76 + 1)
     }
   ) * cell.probs))
   return(centroid.x)
@@ -333,9 +333,9 @@ XCellCentroid <- function(cell.probs) {
 #return y-coordinate cell centroid
 YCellCentroid <- function(cell.probs) {
   centroid.y <- round(x = sum(sapply(
-    X = 1:64,
+    X = 1:3040,
     FUN = function(x) {
-      return((x - 1) %/% 8 + 1)
+      return((x - 1) %/% 76 + 1)
     }
   ) * cell.probs))
   return(centroid.y)

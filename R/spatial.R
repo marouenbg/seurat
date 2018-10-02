@@ -91,7 +91,7 @@ RefinedMapping <- function(object, genes.use) {
   all.mu <- sapply(
     X = genes.use,
     FUN = function(gene) {
-      return(sapply(X = 1:64, FUN = function(bin) {
+      return(sapply(X = 1:3040, FUN = function(bin) {
         mean(x = as.numeric(x = object@imputed[
           gene, # Row
           FetchClosest(
@@ -104,7 +104,7 @@ RefinedMapping <- function(object, genes.use) {
     }
   )
   all.cov <- list()
-  for (x in 1:64) {
+  for (x in 1:3040) {
     all.cov[[x]] <- cov(
       x = t(
         x = object@imputed[
@@ -121,7 +121,7 @@ RefinedMapping <- function(object, genes.use) {
   mv.probs <- sapply(
     X = colnames(x = object@data),
     FUN = function(my.cell) {
-      return(sapply(X = 1:64, FUN = function(bin) {
+      return(sapply(X = 1:3040, FUN = function(bin) {
         return(slimdmvnorm(
           x = as.numeric(x = object@imputed[genes.use, my.cell]),
           mean = as.numeric(x = all.mu[bin, genes.use]),
