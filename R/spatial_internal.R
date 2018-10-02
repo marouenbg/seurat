@@ -32,8 +32,8 @@ AllNeighborCells <- function(bin, dist = 1) {
 #' @importFrom stats dist
 #
 FetchClosest <- function(bin, all.centroids, num.cell) {
-  bin.y <- (bin - 1) %/% 8 + 1
-  bin.x <- (bin - 1) %% 8 + 1
+  bin.y <- (bin - 1) %/% 76 + 1
+  bin.x <- (bin - 1) %% 76 + 1
   all.centroids <- rbind(all.centroids, c(bin.x, bin.y))
   all.dist <- as.matrix(x = dist(x = all.centroids))
   return(names(x = sort(x = all.dist[nrow(x = all.dist), ]))[2:(num.cell + 2)])
