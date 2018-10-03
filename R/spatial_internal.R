@@ -37,8 +37,11 @@ FetchClosest <- function(bin, all.centroids, num.cell) {
   all.centroids <- rbind(all.centroids, c(bin.x, bin.y))
   all.dist <- as.matrix(x = dist(x = all.centroids))
   sortedVec=sort(all.dist[nrow(all.dist), ])
-  if(sortedVec[1]==sortedVec[2] && names(sortedVec)[2]==""){
-  	names(sortedVec)[2]=names(sortedVec)[1]
+  indEmp=which(names(sortedVec)=="")
+  if(!identical(indEmp, integer(0)) && indEmp!=1){
+  	if(sortedVec[indEmp]==sortedVec[1]){
+    		names(sortedVec)[indEmp]=names(sortedVec)[1]
+  	}
   }
   return(names(x = sortedVec)[2:(num.cell + 2)])
 }
