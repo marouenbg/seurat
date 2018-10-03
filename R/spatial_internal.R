@@ -36,7 +36,11 @@ FetchClosest <- function(bin, all.centroids, num.cell) {
   bin.x <- (bin - 1) %% 76 + 1
   all.centroids <- rbind(all.centroids, c(bin.x, bin.y))
   all.dist <- as.matrix(x = dist(x = all.centroids))
-  return(names(x = sort(x = all.dist[nrow(x = all.dist), ]))[2:(num.cell + 2)])
+  sortedVec=sort(all.dist[nrow(all.dist), ])
+  if(sortedVec[1]==sortedVec[2] && names(sortedVec)[2]==""){
+  	names(sortedVec[2])=names(sortedVec[1])
+  }
+  return(names(x = sortedVec)[2:(num.cell + 2)])
 }
 
 #calculate refined mapping probabilites based on multivariate distribution
