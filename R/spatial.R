@@ -250,6 +250,11 @@ FitGeneK <- function(
       ident.table <- table(cell.ident)
     }
   }
+
+  # Add DistMap binary
+  print(cell.ident)
+  print(ident.table)
+
   ident.table <- table(cell.ident)
   raw.probs <- t(
     x = sapply(
