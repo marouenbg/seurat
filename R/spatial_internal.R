@@ -32,8 +32,8 @@ AllNeighborCells <- function(bin, dist = 1) {
 #' @importFrom stats dist
 #
 FetchClosest <- function(bin, all.centroids, num.cell) {
-  bin.y <- (bin - 1) %/% 40 + 1
-  bin.x <- (bin - 1) %% 40 + 1
+  bin.y <- (bin - 1) %/% 80 + 1
+  bin.x <- (bin - 1) %% 80 + 1
   all.centroids <- rbind(all.centroids, c(bin.x, bin.y))
   all.dist <- as.matrix(x = dist(x = all.centroids))
   sortedVec=sort(all.dist[nrow(all.dist), ])
@@ -322,7 +322,7 @@ iter.k.fit <- function(scale.data, cell.ident, data.use) {
 CellCentroid <- function(cell.probs) {
   centroid.x <- XCellCentroid(cell.probs = cell.probs)
   centroid.y <- YCellCentroid(cell.probs = cell.probs)
-  centroid.bin <- 40 * (centroid.y - 1) + centroid.x
+  centroid.bin <- 80 * (centroid.y - 1) + centroid.x
   return(centroid.bin)
 }
 
@@ -331,7 +331,7 @@ XCellCentroid <- function(cell.probs) {
   centroid.x <- round(x = sum(sapply(
     X = 1:3040,
     FUN = function(x) {
-      return((x - 1) %% 40 + 1)
+      return((x - 1) %% 80 + 1)
     }
   ) * cell.probs))
   return(centroid.x)
@@ -342,7 +342,7 @@ YCellCentroid <- function(cell.probs) {
   centroid.y <- round(x = sum(sapply(
     X = 1:3040,
     FUN = function(x) {
-      return((x - 1) %/% 40 + 1)
+      return((x - 1) %/% 80 + 1)
     }
   ) * cell.probs))
   return(centroid.y)
